@@ -5,7 +5,6 @@ import {
     Body,
     UseGuards,
     Delete,
-    NotFoundException,
     HttpStatus,
     Res,
     Param,
@@ -48,13 +47,17 @@ export class UserController {
     })
     @Delete('/delete/:id')
     async remove(@Res() res, @Param('id') id: number) {
-        const user = await this.userService.remove(id);
-        if (!user) {
-            throw new NotFoundException('User does not exist');
+        try {
+            const user = await this.userService.remove(id);
+            return res.status(HttpStatus.OK).json({
+                message: 'User deleted sucessfully',
+                user,
+            });
+        } catch (error) {
+            return res.status(HttpStatus.NOT_FOUND).json({
+                error: error,
+                message: 'User not exist',
+            });
         }
-        return res.status(HttpStatus.OK).json({
-            message: 'Product deleted sucessfully',
-            user,
-        });
     }
 }
