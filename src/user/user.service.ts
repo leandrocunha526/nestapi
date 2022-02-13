@@ -1,3 +1,4 @@
+import { UserRegister } from './dto/user-register.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LoginDto } from './dto/login-user.dto';
 import { PrismaService } from './../prisma/prisma.service';
@@ -44,10 +45,9 @@ export class UserService {
         };
     }
 
-    async register(createUserDto: CreateUserDto): Promise<UserResponse> {
+    async register(createUserDto: CreateUserDto): Promise<UserRegister> {
         const user = await this.usersService.createUser(createUserDto);
         return {
-            token: this.jwtService.sign({ username: user.username }),
             user,
         };
     }

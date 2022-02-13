@@ -1,3 +1,4 @@
+import { UserRegister } from './dto/user-register.dto';
 import {
     Controller,
     Get,
@@ -28,7 +29,7 @@ export class UserController {
     }
 
     @Post('/register')
-    register(@Body() createUserDto: CreateUserDto): Promise<UserResponse> {
+    register(@Body() createUserDto: CreateUserDto): Promise<UserRegister> {
         return this.userService.register(createUserDto);
     }
 
