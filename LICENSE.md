@@ -1,6 +1,6 @@
 (The MIT License)
 
-Copyright (c) 2017-2022 Kamil Mysliwiec <https://kamilmysliwiec.com>
+Copyright (c) 2017-2022 Kamil Mysliwiec <https://kamilmysliwiec.com>  
 Copyright (c) 2022 Leandro Cunha <leandrocunha016@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
