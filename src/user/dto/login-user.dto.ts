@@ -2,10 +2,10 @@ import { IsString, Length } from 'class-validator';
 
 export class LoginDto {
     @IsString()
-    @Length(5, 10)
+    @Length(5, 20)
     username: string;
 
     @IsString()
-    @Length(6, 12)
+    @Length(6, 20)
     password: string;
 }
