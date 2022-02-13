@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    UseGuards,
+    Delete,
+    NotFoundException,
+    HttpStatus,
+    Res,
+    Param,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { LoginDto } from './dto/login-user.dto';
 import { UserResponse } from './dto/user-response.dto';
@@ -25,5 +36,18 @@ export class UserController {
     @Get('/profile')
     getLoggedUser(@AuthUser() user: User): User {
         return user;
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Delete('/delete/:id')
+    async remove(@Res() res, @Param('id') id) {
+        const user = await this.userService.remove(id);
+        if (!user) {
+            throw new NotFoundException('User does not exist');
+        }
+        return res.status(HttpStatus.OK).json({
+            message: 'Product deleted sucessfully',
+            user,
+        });
     }
 }
