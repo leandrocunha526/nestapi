@@ -48,10 +48,9 @@ export class UserController {
     @Delete('/delete/:id')
     async remove(@Res() res, @Param('id') id: number) {
         try {
-            const user = await this.userService.remove(id);
+            await this.userService.remove(id);
             return res.status(HttpStatus.OK).json({
                 message: 'User deleted sucessfully',
-                user,
             });
         } catch (error) {
             return res.status(HttpStatus.NOT_FOUND).json({
