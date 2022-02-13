@@ -17,6 +17,7 @@ import AuthUser from 'src/common/decorators/auth-user.decorator';
 import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './dto/create-user.dto';
+import { ApiParam } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -39,8 +40,14 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @ApiParam({
+        name: 'id',
+        required: true,
+        description: 'an integer for the user id',
+        schema: { oneOf: [{ type: 'integer' }] },
+    })
     @Delete('/delete/:id')
-    async remove(@Res() res, @Param('id') id) {
+    async remove(@Res() res, @Param('id') id: number) {
         const user = await this.userService.remove(id);
         if (!user) {
             throw new NotFoundException('User does not exist');
