@@ -58,6 +58,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+# Insomnia
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=nestapi&uri=https%3A%2F%2Fgithub.com%2Fleandrocunha526%2Fnestapi%2Fblob%2Fmain%2FInsomnia_2022-02-17.json)
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
