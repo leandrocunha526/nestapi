@@ -37,6 +37,7 @@ export class UserController {
     @UseGuards(AuthGuard('jwt'))
     @Get('/profile')
     getLoggedUser(@AuthUser() user: User): User {
+        delete user.password;
         return user;
     }
 

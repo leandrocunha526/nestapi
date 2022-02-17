@@ -3,7 +3,6 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LoginDto } from './dto/login-user.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import {
-    ConflictException,
     Injectable,
     NotFoundException,
     UnauthorizedException,
@@ -61,14 +60,6 @@ export class UserService {
     }
 
     async update(data: CreateUserDto, id: number): Promise<User> {
-        const exist = await this.prismaService.user.findUnique({
-            where: {
-                username: data.username,
-            },
-        });
-        if (exist) {
-            throw new ConflictException('Username already exists');
-        }
         const hanshedPassword = await bcrypt.hash(data.password, 10);
         const user = await this.prismaService.user.update({
             where: {
