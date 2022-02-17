@@ -78,5 +78,5 @@ Nest is [MIT licensed](LICENSE.md).
 
 # Documentation
 
-[NestJS Docs](https://docs.nestjs.com/)
+[NestJS Docs](https://docs.nestjs.com/)  
 [Prisma Docs](https://www.prisma.io/docs/)
