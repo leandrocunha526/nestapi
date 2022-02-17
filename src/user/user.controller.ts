@@ -9,6 +9,7 @@ import {
     HttpStatus,
     Res,
     Param,
+    Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { LoginDto } from './dto/login-user.dto';
@@ -17,7 +18,6 @@ import AuthUser from 'src/common/decorators/auth-user.decorator';
 import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiParam } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -33,6 +33,7 @@ export class UserController {
         return this.userService.register(createUserDto);
     }
 
+    //Need authenticate with Auth Guard to access routes below and recommends use of Insomnia
     @UseGuards(AuthGuard('jwt'))
     @Get('/profile')
     getLoggedUser(@AuthUser() user: User): User {
@@ -40,23 +41,35 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @ApiParam({
-        name: 'id',
-        required: true,
-        description: 'an integer for the user id',
-        schema: { oneOf: [{ type: 'integer' }] },
-    })
     @Delete('/delete/:id')
     async remove(@Res() res, @Param('id') id: number) {
         try {
             await this.userService.remove(id);
             return res.status(HttpStatus.OK).json({
-                message: 'User deleted sucessfully',
+                message: 'User deleted successfully',
             });
         } catch (error) {
             return res.status(HttpStatus.NOT_FOUND).json({
                 error: error,
-                message: 'User not exist',
+            });
+        }
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Put('/update/:id')
+    async update(
+        @Body() createUserDto: CreateUserDto,
+        @Res() res,
+        @Param('id') id: number,
+    ) {
+        try {
+            await this.userService.update(createUserDto, id);
+            return res.status(HttpStatus.OK).json({
+                message: 'User updated successfully',
+            });
+        } catch (error) {
+            return res.json({
+                error: error,
             });
         }
     }

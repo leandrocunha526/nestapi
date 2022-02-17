@@ -60,7 +60,7 @@ $ npm run test:cov
 
 # Insomnia
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=nestapi&uri=https%3A%2F%2Fgithub.com%2Fleandrocunha526%2Fnestapi%2Fblob%2Fmain%2FInsomnia_2022-02-17.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=nestapi&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fleandrocunha526%2Fnestapi%2Fmain%2FInsomnia-All_2022-02-17.json)
 
 ## Support
 
